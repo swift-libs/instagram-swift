@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>InstagramClientId</key>
+	<string>fc6256cc0e354fcd876065a831c6d8a3</string>
+	<key>InstagramRedirectURL</key>
+	<string>http://swift-test</string>
+</dict>
+</plist>

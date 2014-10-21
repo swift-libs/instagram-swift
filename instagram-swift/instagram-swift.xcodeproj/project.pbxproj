@@ -13,6 +13,10 @@
 		924CB86D19F6BC84007E7A3E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 924CB86C19F6BC84007E7A3E /* Images.xcassets */; };
 		924CB87019F6BC84007E7A3E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 924CB86E19F6BC84007E7A3E /* LaunchScreen.xib */; };
 		924CB87C19F6BC85007E7A3E /* instagram_swiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924CB87B19F6BC85007E7A3E /* instagram_swiftTests.swift */; };
+		92A74F3219F6BF170013C85E /* SLInstagramEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A74F3119F6BF170013C85E /* SLInstagramEngine.swift */; };
+		92A74F3419F6C25E0013C85E /* SLInstagramConf.plist in Resources */ = {isa = PBXBuildFile; fileRef = 92A74F3319F6C25E0013C85E /* SLInstagramConf.plist */; };
+		92A74F3C19F6D22C0013C85E /* SLLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A74F3A19F6D22C0013C85E /* SLLoginViewController.swift */; };
+		92A74F3D19F6D22C0013C85E /* SLLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A74F3B19F6D22C0013C85E /* SLLoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,10 @@
 		924CB87519F6BC85007E7A3E /* instagram-swiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "instagram-swiftTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		924CB87A19F6BC85007E7A3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		924CB87B19F6BC85007E7A3E /* instagram_swiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = instagram_swiftTests.swift; sourceTree = "<group>"; };
+		92A74F3119F6BF170013C85E /* SLInstagramEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SLInstagramEngine.swift; path = "instagram-swift/SLInstagramEngine.swift"; sourceTree = "<group>"; };
+		92A74F3319F6C25E0013C85E /* SLInstagramConf.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = SLInstagramConf.plist; path = "instagram-swift/SLInstagramConf.plist"; sourceTree = "<group>"; };
+		92A74F3A19F6D22C0013C85E /* SLLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SLLoginViewController.swift; path = "instagram-swift/Login/SLLoginViewController.swift"; sourceTree = "<group>"; };
+		92A74F3B19F6D22C0013C85E /* SLLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SLLoginViewController.xib; path = "instagram-swift/Login/SLLoginViewController.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +85,7 @@
 		924CB86219F6BC84007E7A3E /* instagram-swift */ = {
 			isa = PBXGroup;
 			children = (
+				92A74F3019F6BEEB0013C85E /* instagram-swift */,
 				924CB86519F6BC84007E7A3E /* AppDelegate.swift */,
 				924CB86719F6BC84007E7A3E /* ViewController.swift */,
 				924CB86919F6BC84007E7A3E /* Main.storyboard */,
@@ -110,6 +119,25 @@
 				924CB87A19F6BC85007E7A3E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		92A74F3019F6BEEB0013C85E /* instagram-swift */ = {
+			isa = PBXGroup;
+			children = (
+				92A74F3919F6D2010013C85E /* Login */,
+				92A74F3119F6BF170013C85E /* SLInstagramEngine.swift */,
+				92A74F3319F6C25E0013C85E /* SLInstagramConf.plist */,
+			);
+			name = "instagram-swift";
+			sourceTree = "<group>";
+		};
+		92A74F3919F6D2010013C85E /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				92A74F3A19F6D22C0013C85E /* SLLoginViewController.swift */,
+				92A74F3B19F6D22C0013C85E /* SLLoginViewController.xib */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,8 +220,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92A74F3D19F6D22C0013C85E /* SLLoginViewController.xib in Resources */,
 				924CB86B19F6BC84007E7A3E /* Main.storyboard in Resources */,
 				924CB87019F6BC84007E7A3E /* LaunchScreen.xib in Resources */,
+				92A74F3419F6C25E0013C85E /* SLInstagramConf.plist in Resources */,
 				924CB86D19F6BC84007E7A3E /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -213,6 +243,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				924CB86819F6BC84007E7A3E /* ViewController.swift in Sources */,
+				92A74F3C19F6D22C0013C85E /* SLLoginViewController.swift in Sources */,
+				92A74F3219F6BF170013C85E /* SLInstagramEngine.swift in Sources */,
 				924CB86619F6BC84007E7A3E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -337,6 +369,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "instagram-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -347,6 +380,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "instagram-swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -405,6 +439,7 @@
 				924CB88119F6BC85007E7A3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		924CB88219F6BC85007E7A3E /* Build configuration list for PBXNativeTarget "instagram-swiftTests" */ = {
 			isa = XCConfigurationList;
@@ -413,6 +448,7 @@
 				924CB88419F6BC85007E7A3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
