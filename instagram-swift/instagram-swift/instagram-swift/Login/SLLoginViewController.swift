@@ -63,6 +63,7 @@ class SLLoginViewController: UIViewController, UIWebViewDelegate {
                     let key = keyValueArray[0]
                     if key == "access_token" {
                         self.delegate?.loginViewControllerDidLogin(keyValueArray[1])
+                        self.dismissViewControllerAnimated(true, completion: nil)
                     }
                     
                 }else {

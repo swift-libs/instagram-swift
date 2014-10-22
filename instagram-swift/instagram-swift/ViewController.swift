@@ -10,25 +10,33 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        let engine = SLInstagramEngine.sharedEngine
-        engine.loginFromViewController(self, completionClosure: { (success, error) -> () in
-            
-        })
-    }
+  let engine = SLInstagramEngine.sharedEngine
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    // Do any additional setup after loading the view, typically from a nib.
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    engine.loginFromViewController(self, completionClosure: { (success, error) -> () in
+      
+    })
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+  }
+  
+  @IBAction func getFeedAction(sender: UIBarButtonItem) {
+    engine.selfFeedWithSuccessClosure({ (objects, pagination) -> () in
+      
+    }, error: { (error) -> () in
+      
+    })
+  }
+  
 }
 
