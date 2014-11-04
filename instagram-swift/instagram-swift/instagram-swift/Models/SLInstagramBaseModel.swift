@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 class SLInstagramBaseModel {
-  var Id : String
+  var ID : String?
   
-  init(dic: [String : AnyObject]) {
-    Id = dic["id"] as String
+  init(json: JSON) {
+    ID = json["id"].string
   }
   
 }

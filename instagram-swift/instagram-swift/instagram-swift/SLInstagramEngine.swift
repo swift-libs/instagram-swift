@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 let kSLInstagramEngineErrorDomain = "kSLInstagramEngineErrorDomain"
 let kSLInstagramEngineErrorCodeAccessNotGranted = -1
@@ -15,7 +17,7 @@ let kSLInstagramEngineErrorCodeAccessNotGranted = -1
 private let kInstagramAuthURL : String = "https://instagram.com/oauth/authorize/"
 private let kInstagramBaseAPIURL : String = "https://api.instagram.com/v1/"
 
-typealias SLInstagramArrayClosure = (objects : [AnyObject], pagination : [String : String]) -> ()
+typealias SLInstagramArrayClosure = (objects : [AnyObject], pagination : [String : JSON]) -> ()
 typealias SLInstagramErrorClosure = (error: NSError) -> ()
 
 class SLInstagramEngine : SLLoginViewControllerDelegate {
@@ -23,7 +25,7 @@ class SLInstagramEngine : SLLoginViewControllerDelegate {
   private var clientId : String?
   private var accessToken: String?
   private var redirectURI : String?
-  private var httpManager : AFHTTPSessionManager
+  private var httpManager : Alamofire.Manager
   
   class var sharedEngine : SLInstagramEngine {
     struct Static {
@@ -47,8 +49,7 @@ class SLInstagramEngine : SLLoginViewControllerDelegate {
       redirectURI = (confDic?.objectForKey("InstagramRedirectURL") as String)
     }
     
-    httpManager = AFHTTPSessionManager(baseURL: NSURL(string: kInstagramBaseAPIURL))
-    httpManager.responseSerializer = AFJSONResponseSerializer() as AFJSONResponseSerializer
+    httpManager = Alamofire.Manager.sharedInstance
   }
   
   // MARK: - Login
@@ -80,17 +81,25 @@ class SLInstagramEngine : SLLoginViewControllerDelegate {
   // MARK: - Self Logged User Methods
   
   func selfFeedWithSuccessClosure(success: SLInstagramArrayClosure, error: SLInstagramErrorClosure) {
-    self.getPath("users/self/feed", parameters:nil , responseModel: SLInstagramEngine.self, authNeeded: true, succes: { (objects, pagination) -> () in
+    self.getPath("users/self/feed", parameters:nil , responseModel: SLInstagramEngine.self, authNeeded: true, success: { (objects, pagination) -> () in
+
+      var medias : [SLInstagramMedia] = []
       
-    }) { (error) -> () in
+      for (index: String, mediaJSON : JSON) in objects {
+        medias.append(SLInstagramMedia(json: mediaJSON))
+      }
       
+      success(objects: medias, pagination: pagination)
+      
+    }) { (err) -> () in
+      error(error: err)
     }
   }
   
   // MARK: - HTTP Calls
   
   private func getPath(path: String, parameters: [String :  String]?, responseModel : AnyClass,
-      authNeeded: Bool, succes: SLInstagramArrayClosure, error: SLInstagramErrorClosure) {
+    authNeeded: Bool, success: (objects : JSON, pagination : [String : JSON]) -> (), error: SLInstagramErrorClosure) {
     
     assert(authNeeded == true && accessToken != nil, "SLInstagram Error: You need an Instagram access token to access the '\(path)' path")
         
@@ -104,14 +113,19 @@ class SLInstagramEngine : SLLoginViewControllerDelegate {
           params["access_token"] = accessToken
         }
         
-        httpManager.GET(path, parameters: params, success: { (dataTask: NSURLSessionDataTask!, responseObject: AnyObject!) -> Void in
-          println("Response: \(responseObject)")
-        }) { (dataTask: NSURLSessionDataTask!, err: NSError!) -> Void in
-          let data = err.userInfo!["com.alamofire.serialization.response.error.data"] as NSData
-          let string = NSString(data: data, encoding: NSUTF8StringEncoding)
-          println("Err: \(string)")
-          error(error: err)
+        httpManager.request(.GET, self.fullURLForPath(path), parameters: params).responseSwiftyJSON { (request, response, json, err) -> Void in
+            if err != nil {
+                error(error: err!);
+            }else{
+                let feed = json["data"]
+                let pagination = json["pagination"].dictionary!
+                success(objects: feed, pagination: pagination)
+            }
         }
   }
+    
+    private func fullURLForPath(path: String) -> String {
+        return "\(kInstagramBaseAPIURL)\(path)"
+    }
   
 }
